@@ -5,51 +5,29 @@ package project1.menu;
 	import java.io.IOException;
 		
 public class menuOptions {	
+	// Define public properties
 	public static int selectSub;
 	public static int goHome;
 	public static int Select;
 	public static boolean correctForm = true;
 	public static boolean goBack = true;
 	public static boolean checkpoint = true;
-	// Define user input variables
-	// Select select = new Select();
 	public static int option1 = 1;
 	public static int option2 = 2;
 	public static int option3 = 3;
 	// --> Place holders for returning option response
-	public static String op1 = "You have selected Option 1";
-	public static String op2 = "You have selected Option 2";
-	public static String op3 = "You have selected Option 3";
+//	public static String op1 = "You have selected Option 1";
+//	public static String op2 = "You have selected Option 2";
+//	public static String op3 = "You have selected Option 3";
 	
 
 		public static void main(String[] args) throws IOException {
-			
-			// Create "checkpoint" which stays true until a "Y" confirmation is received
-			// from the user, this allows the user to automatically return to main menu
-			// if they do not confirm their selection
-//			sub1 Sub1 = new sub1();
-//			sub2 Sub2 = new sub2();
-//			MenuOpt menuOpt = new MenuOpt();
-//			execute Execute = new execute();
-
-			
+	
 			while (goBack) {
 				while (checkpoint) {
-					
-					// clearScreen();
-					// Thread.sleep(1);
 					correctForm = true;
 					MenuOpt();
-					
-					//menuOptions();
-					
 					String Confirm;
-					
-					// If user confirms....
-					// Add condition for Y or N confirmation.
-					// If user does not confirm redirect to main menu
-					//	Scanner userSelect = new Scanner(System.in);
-					//	userInput = userSelect.nextInt();
 					System.out.println("Please confirm selection by entering Y or N");
 					Scanner userConfirm = new Scanner(System.in);
 					Confirm = userConfirm.next();
@@ -58,7 +36,6 @@ public class menuOptions {
 							System.out.println("                               ");	
 							System.out.println("You have confirmed.");
 							checkpoint = false;
-//							executeSelect();
 					} else { 
 						System.out.println("                               ");	
 						System.out.println("You have not confirmed and are being redirected to the main menu.");
@@ -68,8 +45,6 @@ public class menuOptions {
 						String goback = userreturn.nextLine();
 						checkpoint = true;
 					}
-					
-
 				}
 
 				executeSelect(Select);
@@ -86,34 +61,15 @@ public class menuOptions {
 				System.out.println("                               ");	
 				System.out.println("                               ");	
 				System.out.println("                               ");	
-
 			}
-			
-			
-			
 		}
 		
 		
-	// Creating a method to clear the console screen for user when refreshing to main menu
-		// the methods below are non-functional
-		
-//		public static void clearScreen() {
-//		        System.out.print("\033[H\033[2J");
-//		        System.out.flush();
-//		}
 
-//		public static void clearScreen() {  
-//		    // System.out.print("\033[H\033[2J");  
-//		    System.out.close();
-//		    System.out.flush();  
-//		} 	
 		
-		
-		
-//	class menuopt {
-		// Need to add details of the user interface such as options displaying user interaction information
+		// --> Need to add details of the user interface such as options displaying user interaction information
 		public static int MenuOpt() {
-//			while (correctForm) {
+				boolean valSel = true;
 				System.out.println("-------------------------------");	
 				// Welcome Screen (needs to contain application name & developer details)
 				System.out.println("Hello! Welcome to Company Lockers Pvt. Ltd.!");
@@ -121,25 +77,27 @@ public class menuOptions {
 				System.out.println("Developed by Andie Mydosh");
 				System.out.println("----------------------------");
 				
-				
+				// Present the menu options and validate that a correct selection is made
+				while(valSel) {
 				System.out.println("Please select from one of the following options:");
 				System.out.println("1. View the directory list");
 				System.out.println("2. Search or modify directory list");
 				System.out.println("3. Close the application");
 				Scanner userSelect = new Scanner(System.in);
 				Select = userSelect.nextInt();
-				return Select;
+				if(Select==1) {
+					valSel = false;
+				} else if(Select==2) {
+					valSel = false;
+				} else if(Select==3) {
+					valSel = false;
+				} else {
+					System.out.println("You have not selected a valid option. Please select from the available menu options.");
+					System.out.println("----------------------------");
+				}
+				}
 				
-				// Verify the user input is one of the listed options, else return to menu
-//				if(Select ~= 1 || Select ~=2 || Select ~= 3) {
-//					System.out.println("You have not selected a valid option. Please select from the available menu options.");
-//					Return = true;
-//					checkpoint = true;
-//					correctForm = true;
-//				} else {
-//					correctForm = false;
-//				}
-//			}
+				return Select;
 	}
 
 
@@ -148,12 +106,13 @@ public class menuOptions {
 
 
 		
-		// -----------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------------------
 		
 		// Create the actual function for evaluating user input and committing to 
 		// menu options
-//	class execute {
 		public static void executeSelect(int Select) throws IOException {
+			boolean selectValid = true;
+			while(selectValid) {
 			if(Select==1) {
 				
 				// Option 1 execution
@@ -173,12 +132,11 @@ public class menuOptions {
 					System.out.println(pathname);
 				}
 				System.out.println("-------------------------------");
+				selectValid = false;
 				// Add option to return to main menu
 //				System.out.println("If you would like to return to the main menu, please enter 9");
 //				Scanner userReturn = new Scanner(System.in);
 //				Return = userReturn.nextInt();
-				
-				// -->   Need to add conditional code to see if user has selected an option to return
 
 				
 			// Option 2 execution
@@ -189,11 +147,6 @@ public class menuOptions {
 			// Delete a user specified file from the existing directory list (you can add the case sensitivity
 			// on the file name in order to ensure that the right file is deleted from the directory list)
 			// Return a message if FNF (file not found)
-			
-			// Search a user specified file from the main directory (you can add the case sensitivity on the file name 
-			// to retrieve the correct file)
-			// Display the result upon successful operation
-			// Display the result upon unsuccessful operation
 			
 			// Option to return back to the main context	
 			} else if(Select==2) {
@@ -211,33 +164,42 @@ public class menuOptions {
 					selectSub1();
 				} else if(selectSub ==2) {
 					selectSub2();
-				} else {
+				} else if(selectSub ==3) {
 					selectSub3();		
+				} else if(selectSub ==4) {
+					selectSub4();
+				} else {
+					System.out.println("You have not selected a valid option. Please select a valid option to continue.");
 				}
 				
 				System.out.println("                               ");	
-
+				selectValid = false;
 			}
 			
 			
-//			// Option 3 execution
-//			// Third option to close the application
-//			else {
-//				System.out.println("                               ");	
-//				System.out.println("You have selected Option 3");
-//				// --> Code below is non-functional, need to fix
-//				// System.exit(Select);
-//			} 
+			// Option 3 execution
+			// Third option to close the application
+			else if (Select==3) {
+				System.out.println("                               ");	
+				System.out.println("You have successfully exited the application.");
+				System.out.println("Thank you for stopping by!");
+				System.exit(1);
+				selectValid = false;
+			} else {
+				System.out.println("You have not selected a valid option. Please select from the available menu options.");
+				System.out.println("----------------------------");
+			}
 		}
+	}
 			
 		
 		
 		
-		// -------------------------------------------------------------------------
+// -------------------------------------------------------------------------
 		
-	// SUB MENU METHOD OPTIONS
-		// Create methods for each second menu selection
-		// Sub one asks user to input name of file they would like to add to directory
+	// SUB MENU METHOD OPTIONS:
+	//---------------------------
+		// 1. Sub one asks user to input name of file they would like to add to directory
 		// If there is already a file in the directory by that name, the program states
 		// the error and responds that it failed to create file. If a file by the user input
 		// name does not exist already, the file is created.
@@ -250,7 +212,6 @@ public class menuOptions {
 		System.out.println("Enter name of the file you would like to create within the directory.");
 		String FileName = reader.nextLine();
 		
-		// --> Having issues as it doesn't actually add a file even though returns true
 		// Add file to the directory if it doesn't already exist. Show error if it does.
 		File filename = new File(FileName);
 		
@@ -271,6 +232,12 @@ public class menuOptions {
 }
 
 		
+//----------------------------------------------------------------------
+	
+	// 2. Sub two asks user to input name of file they would like to delete from the directory
+	// If there is not a file in the directory by that name, the program states
+	// the error and responds that it failed to delete the file. If a file by the user input
+	// name does exist, the file is deleted and a message of successful deletion is output.
 	public static void selectSub2() throws IOException {
 		boolean canDelete = false;
 		// Check to see if the file the user would like to delete is a valid filename
@@ -278,33 +245,63 @@ public class menuOptions {
 		
 		System.out.println("Enter name of the file you would like to delete.");
 		String FileName = reader.nextLine();
-		
-		// --> Having issues as it doesn't actually add a file even though returns true
-		// Add file to the directory if it doesn't already exist. Show error if it does.
+
 		File filename = new File(FileName);
 		String absFilename = filename.getAbsolutePath();
+		boolean checkfile = true;
+		while(checkfile) {
+			if(filename.exists()) {
+			checkfile = false;
+		
+			try {
+				if (filename.delete()) {
+					// --> Add code to confirm that user would like to delete the file
+					System.out.println("File successfully deleted.");
+				}
+				} catch (Exception e) {
+					System.out.println("Failed to delete file.");
+				}
+				} else {
+					System.out.println("The file you have entered cannot be found. Please verify the filename is correct and try again.");
+			}
+		}
+}			
+		
+	
+	
+//----------------------------------------------------------------------
+	// 3. Sub three allows user to search a specified file from the main directory (you can add the case 
+	// sensitivity on the file name to retrieve the correct file)
+	// Display the result upon successful operation
+	// Display the result upon unsuccessful operation
+	public static void selectSub3() {
+		// Check to see if the file the user would like to add already exists (or a file by the same name)
+		Scanner reader = new Scanner(System.in);
+		boolean success = false;
+		
+		System.out.println("Enter name of the file you are looking for.");
+		String FileName = reader.nextLine();
+		
+		// Add file to the directory if it doesn't already exist. Show error if it does.
+		File filename = new File(FileName);
 		
 		try {
-		if (filename.delete()) {
-			// --> Add code to confirm that user would like to delete the file
-			// --> Delete the file and display confirmation
-			System.out.println("File successfully deleted.");
-			// success = filename.deletefile(??) ();
+		if (filename.exists()) {
+			System.out.println("The file you are looking for is in the directory.");
+		} else {
+			System.out.println("The file you are looking for was not found.");
 		}
 		} catch (Exception e) {
-			// --> Add code to notify user that there is no file in the direcory by that name
-			System.out.println("Failed to delete file.");
+			System.out.printf("Failed to locate file.");
 		}
-			// success = filename.createNewFile();
 		
-	
-	}
-				
-			
-	public static void selectSub3() {
-		System.exit(0);
 		
 		}
-	}
 	
+//----------------------------------------------------------------------
+	// 4. Sub four allow user to return to the main menu
+	public static void selectSub4() {
+		System.out.println("                               ");	
 
+		}
+	}
