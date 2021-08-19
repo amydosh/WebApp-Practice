@@ -1,9 +1,9 @@
 amydosh
-passwordpoop
+password123
 
 Credentials for Facebook:
 andie.mydosh@gmail.com
-poop
+fbPass
 
 Credentials for Twitter:
 amydosh

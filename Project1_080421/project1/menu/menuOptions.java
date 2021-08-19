@@ -36,7 +36,8 @@ public class menuOptions {
 	static File filename = null;
 	public static String userun;
 	public static boolean userValSel = true;
-
+	public static boolean valSel = true;
+	public static boolean selected = true;
 	
 
 		public static void main(String[] args) throws IOException {
@@ -72,6 +73,7 @@ public class menuOptions {
 							}
 	
 						executeSelect(Select);
+						valSel = true;
 						
 						System.out.println("-------------------------------");	
 						System.out.println("Enter to return to main menu");
@@ -100,7 +102,6 @@ public class menuOptions {
 // ------------------------------------------------------------------------------------------------------------------		
 		// --> Need to add details of the user interface such as options displaying user interaction information
 		public static int MenuOpt() {
-				boolean valSel = true;
 				System.out.println("-------------------------------");	
 				// Welcome Screen (needs to contain application name & developer details)
 				System.out.println("Hello! Welcome to Company Lockers Pvt. Ltd.!");
@@ -252,6 +253,7 @@ public class menuOptions {
 			writer.append(fileContents);
 			writer.flush();
 			adminValidationStatus = "failed";
+			userValSel = true;
 		}
 			
 			
@@ -260,7 +262,6 @@ public class menuOptions {
 		
 // -----------------------------------------------------------------------------------------------
 		public static int userLogin() {
-			boolean selected = true;
 			System.out.println("-------------------------------");	
 			// Initial menu should allow user to select whether they are a normal user or an admin
 			// Present the menu options and validate that a correct selection is made
@@ -302,6 +303,7 @@ public class menuOptions {
 				loginAuthenticating = false;
 				
 				userAccess();
+				selected = true;
 				
 			// If account type is admin user
 			// Authenticate user credentials and then...
@@ -310,6 +312,7 @@ public class menuOptions {
 				loginAuthenticating = false;
 				
 				adminAccess();
+				valSel = true;
 				
 			// If user chooses to close the application
 			} else if(accountType==3) {
@@ -332,7 +335,6 @@ public class menuOptions {
 		// Authentication of normal user account
 		public static String userAccess() {
 			boolean findUN = true;
-//			Object[][] userInfo = new Object[1][2];
 			while(findUN) {
 				Scanner userUN = new Scanner(System.in);
 				System.out.println("Welcome to the user login.");
@@ -353,13 +355,11 @@ public class menuOptions {
 						System.out.println("Please enter your password.");
 						Scanner userPW = new Scanner(System.in);
 						String userpw = userPW.nextLine();
-						System.out.println(userpw);
 						
 						String usernameFull = username.concat(".txt");
 						BufferedReader in = new BufferedReader(new FileReader(usernameFull));
 						String unLine = in.readLine();
-
-						
+				
 						unLine = in.readLine();
 
 						if(unLine.equals(userpw)) {
@@ -392,6 +392,7 @@ public class menuOptions {
 			}
 
 			return userun;
+			
 			
 			
 		}
@@ -479,11 +480,11 @@ public class menuOptions {
 					System.out.println(pathname);
 				}
 				System.out.println("-------------------------------");
+				// --> Trying to get the menu to auto re-direct to admin value after execution instead of auto re-directing to the main menu
 				selectValid = false;
-				// Add option to return to main menu
-//				System.out.println("If you would like to return to the main menu, please enter 9");
-//				Scanner userReturn = new Scanner(System.in);
-//				Return = userReturn.nextInt();
+			
+				
+		
 
 				
 			// Option 2 execution
@@ -520,6 +521,7 @@ public class menuOptions {
 				}
 				
 				System.out.println("                               ");	
+				// --> Trying to get the menu to auto re-direct to admin value after execution instead of auto re-directing to the main menu
 				selectValid = false;
 			}
 			
@@ -535,6 +537,7 @@ public class menuOptions {
 			} else {
 				System.out.println("You have not selected a valid option. Please select from the available menu options.");
 				System.out.println("----------------------------");
+				System.out.println("");
 			}
 		}
 	}
@@ -574,6 +577,10 @@ public class menuOptions {
 		}
 		} catch (Exception e) {
 			System.out.printf("Failed to create new file.");
+		} finally {
+			System.out.println("");
+			System.out.println("");
+			System.out.println("");
 		}
 
 }
@@ -607,6 +614,9 @@ public class menuOptions {
 				}
 				} catch (Exception e) {
 					System.out.println("Failed to delete file.");
+				} finally {
+					System.out.println("");
+					System.out.println("");
 				}
 				} else {
 					System.out.println("The file you have entered cannot be found. Please verify the filename is correct and try again.");
@@ -640,6 +650,9 @@ public class menuOptions {
 		}
 		} catch (Exception e) {
 			System.out.printf("Failed to locate file.");
+		} finally {
+			System.out.println("");
+			System.out.println("");
 		}
 		
 		
