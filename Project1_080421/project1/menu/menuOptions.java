@@ -43,6 +43,13 @@ public class menuOptions {
 		public static void main(String[] args) throws IOException {
 			// --> Update so that code doesn't circle you back to main menu after operation, rather to the admin or user menu
 			// --> Update the modify credentials code so that it doesn't modify anything that partially matches
+			// --> Need to add in sorting of files for display to admin
+			// --> User should be able to store / view credentials
+			// --> Need a registration page for users
+			// --> Registration -> Login -> Fetch OR Store -> Exit
+			// --> Store all user information in lockedme.users.txt (or similar)
+			// --> Each user has one file in which all their credentials are stored
+			// --> Credentials should be stored as username, password, site name
 			
 			while (goBack) {
 				while (checkpoint) {
