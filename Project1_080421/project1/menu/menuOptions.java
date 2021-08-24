@@ -50,6 +50,8 @@ public class menuOptions {
 			// --> Store all user information in lockedme.users.txt (or similar)
 			// --> Each user has one file in which all their credentials are stored
 			// --> Credentials should be stored as username, password, site name
+			// --> Store should append data to the file
+			// --> Need to add navigation option to close the current exec'n context and return to main
 			
 			while (goBack) {
 				while (checkpoint) {
