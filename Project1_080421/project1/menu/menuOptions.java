@@ -43,20 +43,22 @@ public class menuOptions {
 		public static void main(String[] args) throws IOException {
 			// --> Update so that code doesn't circle you back to main menu after operation, rather to the admin or user menu
 			// --> Update the modify credentials code so that it doesn't modify anything that partially matches
-			// --> Need to add in sorting of files for display to admin
-			// --> User should be able to store / view credentials
+			// --> Need to add in sorting of files for display to admin		
 			// --> Need a registration page for users
 			// --> Registration -> Login -> Fetch OR Store -> Exit
 			// --> Store all user information in lockedme.users.txt (or similar)
-			// --> Each user has one file in which all their credentials are stored
-			// --> Credentials should be stored as username, password, site name
 			// --> Store should append data to the file
 			// --> Need to add navigation option to close the current exec'n context and return to main
+			
+			// Completed updates:
+				// Each user has one file in which all their credentials are stored
+				// Credentials should be stored as username, password, site name
+				// User should be able to store / view credentials
 			
 			while (goBack) {
 				while (checkpoint) {
 					correctForm = true;
-				
+					
 					userLogin();
 					executeLoginAuthentication(accountType);
 					
@@ -159,8 +161,10 @@ public class menuOptions {
 				while(userValSel) {
 				System.out.println("Please select from one of the following options:");
 				System.out.println("1. View your credentials");
-				System.out.println("2. Modify your credentials");
-				System.out.println("3. Close the application");
+				System.out.println("2. Modify your existing credentials");
+				System.out.println("3. Add new credentials");
+				System.out.println("4. Delete existing credentials");
+				System.out.println("5. Close the application");
 				Scanner userSelect = new Scanner(System.in);
 				Select = userSelect.nextInt();
 				if(Select==1) {
@@ -175,17 +179,33 @@ public class menuOptions {
 					}
 					adminValidationStatus = "failed";
 				} else if(Select==3) {
+					try {
+						userSub3(userun);
+					} catch (IOException e) {
+						System.out.println("Failed to add data.");
+					}
+				} else if (Select==4) {
+					userValSel = false;
+					try {
+						userSub4(userun);
+					} catch (IOException e) {
+						System.out.println("Failed to delete credentials.");
+					}
+				}
+				else if (Select==5){
 					userValSel = false;
 					System.out.println("                               ");	
 					System.out.println("You have successfully exited the application.");
 					System.out.println("Thank you for stopping by!");
 					System.exit(1);
+
 				} else {
 					System.out.println("You have not selected a valid option. Please select from the available menu options.");
 					System.out.println("----------------------------");
 				}
 				}
-				adminValidationStatus = "failed";
+				// --> Get rid of this???
+//				adminValidationStatus = "failed";
 				return Select;
 	}
 
@@ -193,8 +213,8 @@ public class menuOptions {
 		// User sub option 1 - display credentials on the screen
 		public static void userSub1(String userun) {
 			try {
-				System.out.println(userun);
-				BufferedReader in = new BufferedReader(new FileReader(userun));
+				String fullUserFile = "UserFiles/".concat(userun);
+				BufferedReader in = new BufferedReader(new FileReader(fullUserFile));
 				String line = in.readLine();
 				System.out.println("");
 				System.out.println("");
@@ -221,7 +241,8 @@ public class menuOptions {
 				System.out.println("");
 				System.out.println("");
 				System.out.println("");
-				adminValidationStatus = "failed";
+				// --> Get rid of this??
+//				adminValidationStatus = "failed";
 			}
 			}
 
@@ -229,7 +250,9 @@ public class menuOptions {
 // -----------------------------------------------------------------------------------------------
 		// User sub option 2 - modify credentials
 		public static void userSub2(String userun) throws IOException {
-			Scanner sc = new Scanner(new File(userun));
+			
+			String fullUserFileMod = "UserFiles/".concat(userun);
+			Scanner sc = new Scanner(new File(fullUserFileMod));
 			StringBuffer buffer = new StringBuffer();
 			while(sc.hasNextLine()) {
 				buffer.append(sc.nextLine()+System.lineSeparator());
@@ -238,7 +261,6 @@ public class menuOptions {
 			// Display the user's current credentials:
 			String fileContents = buffer.toString();
 			System.out.println("Your current credentials are shown below.");
-			System.out.println("Contents of the file: ");
 			System.out.println(fileContents);
 			Scanner oldLine = new Scanner(System.in);
 			
@@ -253,7 +275,7 @@ public class menuOptions {
 			
 			// Replace the data as specified by user:
 			fileContents = fileContents.replaceAll(oldline, newline);
-			FileWriter writer = new FileWriter(userun);
+			FileWriter writer = new FileWriter(fullUserFileMod);
 			System.out.println("");
 			
 			// Display confirmation that credentials have been updated and print new credentials
@@ -261,12 +283,96 @@ public class menuOptions {
 			System.out.println(fileContents);
 			writer.append(fileContents);
 			writer.flush();
-			adminValidationStatus = "failed";
+			// --> Get rid of this??
+//			adminValidationStatus = "failed";
 			userValSel = true;
 		}
 			
 			
+// ------------------------------------------------------------------------------------------------
+		// User sub option 3 - add credentials
+		public static void userSub3(String userun) throws IOException {
+			
+			String fullUserFileMod = "UserFiles/".concat(userun);;
+			Scanner newforum = new Scanner(System.in);
+			System.out.println("Please enter the name of the application for which you would like to store new credentials.");
+			String newForum = newforum.nextLine();
+			System.out.println("Please enter the username you would like to store.");
+			Scanner newun = new Scanner(System.in);
+			String newUN = newun.nextLine();
+			System.out.println("Please enter the password you would like to store.");
+			Scanner newpw = new Scanner(System.in);
+			String newPW = newpw.nextLine();
+			String newForumbk = newForum.concat("\n");
+			String newUNbk = newUN.concat("\n");
+			String newPWbk = newPW.concat("\n");
+			String newInput = "\n".concat(newForumbk).concat(newUNbk).concat(newPWbk);
+			System.out.println("The new credentials being added to your file are:");
+			System.out.println(newInput);
+			
+			// Open the file in writing mode:
+			Scanner addCred = new Scanner(new File(fullUserFileMod));
+			StringBuffer buffer = new StringBuffer();
+			while(addCred.hasNextLine()) {
+				buffer.append(addCred.nextLine()+System.lineSeparator());
+			}
+			
+			// Add the new credentials:
+			String fileContents = buffer.toString();
+			fileContents = fileContents.concat(newInput);
+
+			FileWriter writer = new FileWriter(fullUserFileMod);
+			writer.append(fileContents);
+			writer.flush();
+
+// --> Can I get rid of this?!
+//			userValSel = true;
+		}
 		
+		
+// ------------------------------------------------------------------------------------------------
+		// User sub option 4 - delete credentials
+		public static void userSub4(String userun) throws IOException {
+			String fullUserFileDel = "UserFiles/".concat(userun);
+			Scanner deleteSC = new Scanner(new File(fullUserFileDel));
+			StringBuffer bufferDelete = new StringBuffer();
+			while(deleteSC.hasNextLine()) {
+				bufferDelete.append(deleteSC.nextLine()+System.lineSeparator());
+			}
+			
+			// Display the user's current credentials:
+			String deletedfileContents = bufferDelete.toString();
+			System.out.println("Your current credentials are shown below.");
+			System.out.println(deletedfileContents);
+			Scanner deleteLineForum = new Scanner(System.in);
+			Scanner deleteLineUN = new Scanner(System.in);
+			Scanner deleteLinePW = new Scanner(System.in);
+			
+			// Prompt user to select the data they would like to delete:
+			System.out.println("Please enter the forum for the credentials you would like to delete.");
+			String deletelineForum = deleteLineForum.nextLine();
+			deletedfileContents = deletedfileContents.replaceAll(deletelineForum,"");
+			System.out.println("Please enter the forum for the credentials you would like to delete.");
+			String deletelineUN = deleteLineUN.nextLine();
+			deletedfileContents = deletedfileContents.replaceAll(deletelineUN, "");
+			System.out.println("Please enter the forum for the credentials you would like to delete.");
+			String deletelinePW = deleteLinePW.nextLine();
+			deletedfileContents = deletedfileContents.replaceAll(deletelinePW,"");
+			
+			// Replace the data as specified by user:
+// --> Need to fix this to delete all data specified (currently deletes the line and replaces with blank)
+			FileWriter writer = new FileWriter(fullUserFileDel);
+			System.out.println("");
+			
+			// Display confirmation that credentials have been updated and print new credentials
+			System.out.println("Your updated credentials are shown below.");
+			System.out.println(deletedfileContents);
+			writer.append(deletedfileContents);
+			writer.flush();
+			userValSel = true;
+		}
+				
+				
 		
 		
 // -----------------------------------------------------------------------------------------------
@@ -278,7 +384,8 @@ public class menuOptions {
 			System.out.println("Please select from one of the following options:");
 			System.out.println("1. User Login");
 			System.out.println("2. Admin Login");
-			System.out.println("3. Close the application");
+			System.out.println("3. Create new user account");
+			System.out.println("4. Close the application");
 			Scanner userSelectLogin = new Scanner(System.in);
 			accountType = userSelectLogin.nextInt();
 			if(accountType==1) {
@@ -286,6 +393,8 @@ public class menuOptions {
 			} else if(accountType==2) {
 				selected = false;
 			} else if(accountType==3) {
+				selected = false;
+			} else if(accountType==4) {
 				selected = false;
 			} else {
 				System.out.println("You have not selected a valid option. Please select from the available menu options.");
@@ -323,8 +432,17 @@ public class menuOptions {
 				adminAccess();
 				valSel = true;
 				
+			// If user would like to create an account:	
+// --> Need to create code to write a new file for user account registration
+			} else if(accountType==4) {
+//				System.out.println("                               ");	
+//				System.out.println("You have successfully exited the application.");
+//				System.out.println("Thank you for stopping by!");
+//				System.exit(1);
+				loginAuthenticating = false;
+				
 			// If user chooses to close the application
-			} else if(accountType==3) {
+			} else if(accountType==4) {
 				System.out.println("                               ");	
 				System.out.println("You have successfully exited the application.");
 				System.out.println("Thank you for stopping by!");
@@ -352,7 +470,10 @@ public class menuOptions {
 				boolean pwValidate = true;
 				
 				// Search the directory for a filename that matches the user entered username
-				File userFile = new File(username);
+				String fullUserFile = "UserFiles/".concat(username.concat(".txt"));
+
+				File userFile = new File(fullUserFile);
+				
 				
 				try {
 					
@@ -364,9 +485,7 @@ public class menuOptions {
 						System.out.println("Please enter your password.");
 						Scanner userPW = new Scanner(System.in);
 						String userpw = userPW.nextLine();
-						
-						String usernameFull = username.concat(".txt");
-						BufferedReader in = new BufferedReader(new FileReader(usernameFull));
+						BufferedReader in = new BufferedReader(new FileReader(userFile));
 						String unLine = in.readLine();
 				
 						unLine = in.readLine();
@@ -389,13 +508,14 @@ public class menuOptions {
 						System.out.println("Your username has not been found");
 						findUN = true;
 						userValidationStatus = "failed";
+						adminValidationStatus = "failed";
 					}
 				} catch (IOException e1) {
 					System.out.printf("Failed to locate username.");
 					userValidationStatus = "failed";
+					adminValidationStatus = "failed";
 				}
 				userun = username;
-				userValidationStatus = "validated";
 				return userValidationStatus;
 				
 			}
@@ -418,13 +538,13 @@ public class menuOptions {
 			String adminun = adminUN.next();
 			boolean pwValidate = true;
 			
-			// --> create hashmap for admin users
+			// Create hashmap for admin users
 			Map<String, String> adminUsers = new HashMap<String, String>();
 			adminUsers.put("admin1", "password1");
 			adminUsers.put("admin2", "password2");
 			adminUsers.put("admin3", "password3");
 			
-			// --> write logic to search for admin credentials
+			// Logic to search for admin credentials
 			for(int i=0; i<adminUsers.size(); i++) {
 				while(pwValidate) {
 				try {
@@ -481,8 +601,13 @@ public class menuOptions {
 				String[] pathnames;
 				// Create a new file instance by converting the given pathname string to an 
 				// abstract pathname
-				File dir = new File("/Users/andrealawrence/Documents/GitHub/Project1_080421");
+				
+// --> This needs to be updated so that it shows the correct files when this project is cloned! Cannot be on the users/and.... directory!
+				File dir = new File("/Users/andrealawrence/Documents/GitHub/Project1_080421/UserFiles");
 				// Create an array with names of files and directories
+				
+				
+// --> Need to sort the files by alphabetic name!
 				pathnames = dir.list();
 				// For each pathname in the pathnames array, list the name
 				for (String pathname : pathnames) {
@@ -570,9 +695,11 @@ public class menuOptions {
 		
 		System.out.println("Enter name of the file you would like to create within the directory.");
 		String FileName = reader.nextLine();
+		String folder = "/UserFiles/";
+		String filePath = folder.concat(FileName);
 		
 		// Add file to the directory if it doesn't already exist. Show error if it does.
-		File filename = new File(FileName);
+		File filename = new File(filePath);
 		
 		try {
 		if (filename.exists()) {
@@ -608,9 +735,13 @@ public class menuOptions {
 		
 		System.out.println("Enter name of the file you would like to delete.");
 		String FileName = reader.nextLine();
+		String folder = "/UserFiles/";
+		String filePath = folder.concat(FileName);
 
 		File filename = new File(FileName);
-		String absFilename = filename.getAbsolutePath();
+
+		// --> Get rid of this??
+//		String absFilename = filename.getAbsolutePath();
 		boolean checkfile = true;
 		while(checkfile) {
 			if(filename.exists()) {
@@ -647,6 +778,8 @@ public class menuOptions {
 		
 		System.out.println("Enter name of the file you are looking for.");
 		String FileName = reader.nextLine();
+		String folder = "/UserFiles/";
+		String filePath = folder.concat(FileName);
 		
 		// Add file to the directory if it doesn't already exist. Show error if it does.
 		File filename = new File(FileName);
