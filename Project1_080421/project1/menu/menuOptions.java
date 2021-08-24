@@ -2,19 +2,16 @@ package project1.menu;
 	
 	import java.io.BufferedReader;
 	import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.util.HashMap;
+	import java.io.FileInputStream;
+	import java.io.FileNotFoundException;
+	import java.io.FileOutputStream;
+	import java.io.FileReader;
+	import java.io.FileWriter;
+	import java.util.HashMap;
 	import java.util.Map;
 	import java.util.Scanner;
-
 	import javax.security.auth.login.AccountException;
-
 	import java.io.IOException;
-	import project1.menu.adminUsers;
 		
 public class menuOptions {	
 	// Define public properties
@@ -46,7 +43,6 @@ public class menuOptions {
 			// --> Need to add in sorting of files for display to admin		
 			// --> Need a registration page for users
 			// --> Registration -> Login -> Fetch OR Store -> Exit
-			// --> Store all user information in lockedme.users.txt (or similar)
 			// --> Store should append data to the file
 			// --> Need to add navigation option to close the current exec'n context and return to main
 			
@@ -54,6 +50,7 @@ public class menuOptions {
 				// Each user has one file in which all their credentials are stored
 				// Credentials should be stored as username, password, site name
 				// User should be able to store / view credentials
+				// Store all user information in lockedme.users.txt (or similar)
 			
 			while (goBack) {
 				while (checkpoint) {
@@ -204,7 +201,7 @@ public class menuOptions {
 					System.out.println("----------------------------");
 				}
 				}
-				// --> Get rid of this???
+// --> Get rid of this???
 //				adminValidationStatus = "failed";
 				return Select;
 	}
@@ -241,7 +238,7 @@ public class menuOptions {
 				System.out.println("");
 				System.out.println("");
 				System.out.println("");
-				// --> Get rid of this??
+// --> Get rid of this??
 //				adminValidationStatus = "failed";
 			}
 			}
@@ -283,7 +280,7 @@ public class menuOptions {
 			System.out.println(fileContents);
 			writer.append(fileContents);
 			writer.flush();
-			// --> Get rid of this??
+// --> Get rid of this??
 //			adminValidationStatus = "failed";
 			userValSel = true;
 		}
@@ -434,12 +431,47 @@ public class menuOptions {
 				
 			// If user would like to create an account:	
 // --> Need to create code to write a new file for user account registration
-			} else if(accountType==4) {
-//				System.out.println("                               ");	
-//				System.out.println("You have successfully exited the application.");
-//				System.out.println("Thank you for stopping by!");
-//				System.exit(1);
-				loginAuthenticating = false;
+			} else if(accountType==3) {
+				boolean accountReg = true;
+				while(accountReg) {
+					Scanner newuserUN = new Scanner(System.in);
+					System.out.println("Welcome to the user registration.");
+					System.out.println("Please enter your desired username.");
+					String newUsername = newuserUN.nextLine();
+					
+					// Search the directory for a filename that matches the user entered username
+					String newFullUserFile = "UserFiles/".concat(newUsername.concat(".txt"));
+
+					File newUserFile = new File(newFullUserFile);
+					try {
+						
+						// If a file with the given username is found, ask for password
+						if (newUserFile.createNewFile()) {
+							System.out.println("Your desired username is available.");
+							System.out.println("Please enter your desired password.");
+							Scanner newuserPW = new Scanner(System.in);
+							String newUserPW = newuserPW.nextLine();
+							// Write content to file -> FileWriter -> Character Stream
+							FileWriter fileWriter = new FileWriter(newUserFile);
+							fileWriter.write(newUsername.concat("\n").concat(newUserPW).concat("\n"));
+							fileWriter.close();
+							System.out.println("User registration successful.");
+
+						} else {
+							System.out.println("Your desired username already exists, please try another username.");
+							accountReg = true;
+						}			
+					} catch (IOException e) {
+						System.out.println("File creation failed.");
+					}
+							accountReg = false;
+							loginAuthenticating = false;
+							selected = true;
+							userAccess();
+						}
+
+
+
 				
 			// If user chooses to close the application
 			} else if(accountType==4) {
@@ -655,7 +687,7 @@ public class menuOptions {
 				}
 				
 				System.out.println("                               ");	
-				// --> Trying to get the menu to auto re-direct to admin value after execution instead of auto re-directing to the main menu
+// --> Trying to get the menu to auto re-direct to admin value after execution instead of auto re-directing to the main menu
 				selectValid = false;
 			}
 			
@@ -681,7 +713,7 @@ public class menuOptions {
 		
 // -------------------------------------------------------------------------
 		
-	// SUB MENU METHOD OPTIONS:
+	// ADMIN SUB MENU METHOD OPTIONS:
 	//---------------------------
 		// 1. Sub one asks user to input name of file they would like to add to directory
 		// If there is already a file in the directory by that name, the program states
@@ -740,8 +772,6 @@ public class menuOptions {
 
 		File filename = new File(FileName);
 
-		// --> Get rid of this??
-//		String absFilename = filename.getAbsolutePath();
 		boolean checkfile = true;
 		while(checkfile) {
 			if(filename.exists()) {
