@@ -77,11 +77,6 @@ public class PostHandler extends HttpServlet {
 			e.printStackTrace();
 		}
 		}
-		
-
-		
-		
-		
 
 	}
 
