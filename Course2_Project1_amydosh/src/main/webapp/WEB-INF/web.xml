@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>XXX Flight Booking Services</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+   <servlet>
+  	<servlet-name>CreateAdmin</servlet-name>
+  	<servlet-class>com.servlet.CreateAdmin</servlet-class>
+  </servlet>
+  
+  <servlet>
+  	<servlet-name>AdminAuth</servlet-name>
+  	<servlet-class>com.servlet.AdminAuth</servlet-class>
+  </servlet>
+  
+   <servlet>
+  	<servlet-name>SearchFlights</servlet-name>
+  	<servlet-class>com.servlet.SearchFlights</servlet-class>
+  </servlet>
+  
+   <servlet>
+  	<servlet-name>ShowAll</servlet-name>
+  	<servlet-class>com.servlet.ShowAll</servlet-class>
+  </servlet>
+  
+   <servlet>
+  	<servlet-name>AddFlight</servlet-name>
+  	<servlet-class>com.servlet.AddFlight</servlet-class>
+  </servlet>
+  
+
+  
+   <servlet-mapping>
+  	<servlet-name>CreateAdmin</servlet-name>
+  	<url-pattern>/createAdmin</url-pattern>
+  </servlet-mapping>
+  
+   <servlet-mapping>
+  	<servlet-name>AdminAuth</servlet-name>
+  	<url-pattern>/adminAuth</url-pattern>
+  </servlet-mapping>
+  
+    
+   <servlet-mapping>
+  	<servlet-name>SearchFlights</servlet-name>
+  	<url-pattern>/searchFlights</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>ShowAll</servlet-name>
+  	<url-pattern>/showAll</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>AddFlight</servlet-name>
+  	<url-pattern>/addFlight</url-pattern>
+  </servlet-mapping>
+
+</web-app>
