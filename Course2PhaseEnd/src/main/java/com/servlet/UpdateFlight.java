@@ -19,13 +19,13 @@ import com.util.HibernateUtil;
  * Servlet implementation class UpdatePackage
  */
 @WebServlet("/UpdatePackage")
-public class UpdatePackage extends HttpServlet {
+public class UpdateFlight extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdatePackage() {
+    public UpdateFlight() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -81,7 +81,7 @@ public class UpdatePackage extends HttpServlet {
 		trans.commit();
 		session.close();
 		
-		response.sendRedirect("list_product.jsp");
+		response.sendRedirect("list_flights.jsp");
 	}
 
 }

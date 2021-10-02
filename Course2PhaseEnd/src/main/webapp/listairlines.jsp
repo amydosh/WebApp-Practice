@@ -19,20 +19,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Show All Available Flights</title>
+<title>List of All Airlines</title>
 </head>
 <body>
 
 
 <table border="1" width="100%">
 <tr>
-	<td>Itinerary ID</td>
-	<td>Departure Date</td>
-	<td>Departure Location</td>
-	<td>Destination</td>
-	<td>Schedule</td>
+
 	<td>Airline</td>
-	<td>Action</td>
+
 
 </tr>
 
@@ -46,36 +42,19 @@
 	List<Itinerary> itins = query.getResultList();
 	
 	%>
+
 	
-	<h1><b>List of Current Itineraries</b></h1>
+	<h1><b>List of Airlines</b></h1>
 	
 	<%
 	for(Itinerary i:itins){
 		%>
 		<tr>
-		<td><%=i.getItinID()%></td>
-		<td><%=i.getDepartDate() %></td>
-		<td><%=i.getDepartLoc()%></td>
-		<td><%=i.getDestLoc()%></td>
-		<td>
-			<b>Flight Number:</b> <%=i.getSchedule().getFlightNum() %><br>
-			<b>Departure Time: </b><%=i.getSchedule().getDepartTime() %><br>
-			<b>Arrival Time: </b><%=i.getSchedule().getArriveTime() %><br>
-		</td>
-
 		<td>
 			<b>Airline:</b> <%=i.getAirline().getAirlineName() %><br>
-			<b>Ticket Price:</b> $<%=i.getAirline().getTicketPrice() %><br>
-			<b>Flight Capacity:</b> <%=i.getAirline().getFlightCapacity() %><br>	
 		</td>
-		<td> <a href="bookflight.jsp?pid=<%=i.getItinKey()%>">Book Flight</a></td>
-		
-		</tr>
-		
-		
-		<% 	
-		
-
+		</tr>	
+	<% 	
 	}
 
 	
@@ -84,6 +63,8 @@
 %>
 
 </table>
+<br><br>
+<a href="dashboard.jsp">Return to Admin Dashboard</a>
 
 </body>
 </html>

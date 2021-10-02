@@ -13,16 +13,18 @@
 <%@page import="com.flights.Itinerary" %>
 <%@page import="java.util.List" %>
 
+
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Show All Available Flights</title>
+<title>View All Flight Itineraries</title>
 </head>
 <body>
-
 
 <table border="1" width="100%">
 <tr>
@@ -46,6 +48,7 @@
 	List<Itinerary> itins = query.getResultList();
 	
 	%>
+	<a href="add.jsp">Add New Itinerary</a><br><br>
 	
 	<h1><b>List of Current Itineraries</b></h1>
 	
@@ -68,14 +71,20 @@
 			<b>Ticket Price:</b> $<%=i.getAirline().getTicketPrice() %><br>
 			<b>Flight Capacity:</b> <%=i.getAirline().getFlightCapacity() %><br>	
 		</td>
-		<td> <a href="bookflight.jsp?pid=<%=i.getItinKey()%>">Book Flight</a></td>
 		
+		<td>
+			<a href="delete?pid=<%=i.getItinKey() %>">Delete</a>
+			<a href="update.jsp?pid=<%=i.getItinKey() %>">Update</a>
+			
+		
+		</td>
 		</tr>
 		
 		
-		<% 	
 		
-
+	
+		
+	<% 	
 	}
 
 	
@@ -84,6 +93,8 @@
 %>
 
 </table>
+<br><br>
+<a href="dashboard.jsp">Return to Admin Dashboard</a>
 
 </body>
 </html>

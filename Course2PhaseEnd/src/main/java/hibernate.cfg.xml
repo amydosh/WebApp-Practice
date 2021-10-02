@@ -17,6 +17,7 @@
     <mapping class="com.flights.Schedule"></mapping>
     <mapping class="com.flights.Itinerary"></mapping>
     <mapping class="com.flights.Airlines"></mapping>
+    <mapping class="com.flights.ConfirmedFlights"></mapping>
     
     
     

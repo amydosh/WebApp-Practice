@@ -15,6 +15,8 @@ public class Admin {
 	private int adminId;
 	private String adminUN;
 	private String adminPW;
+	
+	
 	public String getAdminUN() {
 		return adminUN;
 	}

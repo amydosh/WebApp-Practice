@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 
 import com.common.Admin;
@@ -60,19 +62,26 @@ public class CreateAdmin extends HttpServlet {
 			
 			// Verify the correct admin key was entered
 			if(adminkey.equals("adminkey123")) {
+
+				Criteria crit = session.createCriteria(Admin.class);
+				crit.add(Restrictions.eq("adminUN", adminun));
+				crit.add(Restrictions.eq("adminPW", adminpw));
+
+				List<Admin> checkUN = crit.list();
 				
-				// --> Need to add code here to verify the UN also doesn't exist
-				
-				Admin admin1 = new Admin(adminun,adminpw);
-				out.println("New admin user account successfully created.");
-				session.save(admin1);
-				trans.commit();
-				session.close();
-			}else {
-				
-				// --> Need to add code here to redirect the user to login
-				
-				response.sendRedirect("CreateAdmin.html");
+				if(checkUN.isEmpty()){
+					Admin admin1 = new Admin(adminun,adminpw);
+					out.println("New admin user account successfully created.");
+					session.save(admin1);
+					trans.commit();
+					session.close();
+					response.sendRedirect("dashboard.jsp");
+				} else{
+					response.sendRedirect("UNexists.html");
+					out.println("Sorry! The username entered already exists. Please select a new username.");
+				}
+			}else {			
+				response.sendRedirect("InvalidKey.html");
 				out.println("An invalid key was entered. Please try again.");	
 			}
 			

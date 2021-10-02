@@ -4,18 +4,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Welcome to XXX Booking Services!</title>
+<title>FlyAway Booking Services</title>
 </head>
 <body>
 
 
-<b>Welcome to XXX Booking Services!</b><br><br>
+<b>Welcome to FlyAway Booking Services!</b><br><br>
 
-Please select from the following options:<br>
-<a href="Search.jsp">Search for a Flight</a>
+Please select from the following menu options:<br>
+<a href="search.jsp">Search for a Flight</a>
 
 <br>
-<a href="List_Flights.jsp"> Show All Available Flights </a>
+<a href="showall.jsp"> Show All Available Flights </a>
 
 <br>
 <a href="login.jsp"> Admin Login </a>

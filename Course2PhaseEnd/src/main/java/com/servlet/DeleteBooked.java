@@ -10,20 +10,21 @@ import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.flights.ConfirmedFlights;
 import com.flights.Itinerary;
 import com.util.HibernateUtil;
 
 /**
- * Servlet implementation class DeleteItin
+ * Servlet implementation class DeleteBooked
  */
-@WebServlet("/DeleteItin")
-public class DeleteItin extends HttpServlet {
+@WebServlet("/DeleteBooked")
+public class DeleteBooked extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteItin() {
+    public DeleteBooked() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,16 +36,16 @@ public class DeleteItin extends HttpServlet {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction trans = session.beginTransaction();
 		
-		Itinerary itin = session.load(Itinerary.class, Integer.parseInt(request.getParameter("pid")));
+		ConfirmedFlights cf = session.load(ConfirmedFlights.class, Integer.parseInt(request.getParameter("pid")));
 				
-		session.delete(itin);	
+		session.delete(cf);	
 		
 		
 		
 		trans.commit();
 		session.close();
 		
-		response.sendRedirect("list_flights.jsp");
+		response.sendRedirect("viewbooked.jsp");
 	}
 
 	/**

@@ -44,13 +44,13 @@ public class AddFlight extends HttpServlet {
 		String deptloc = request.getParameter("newItinDeptLoc");
 		String dest = request.getParameter("newItinDest");
 		String flightNum = request.getParameter("flightnum");
-		String airlineName = request.getParameter("airlineName");
+		String airlineName = request.getParameter("newItinAirline");
 		String departTime = request.getParameter("departTime");
 		String arriveTime = request.getParameter("arriveTime");
-//		int flightCapacity = Integer.parseInt(request.getParameter("flightCap"));
-//		double ticketPrice = Double.parseDouble(request.getParameter("ticketPrice"));
-		int flightCapacity = 180;
-		double ticketPrice = 256.57;
+		int flightCapacity = Integer.parseInt(request.getParameter("newItinPlaneCap"));
+		double ticketPrice = Double.parseDouble(request.getParameter("newItinPrice"));
+//		int flightCapacity = 180;
+//		double ticketPrice = 256.57;
 		
 		
 		
@@ -79,7 +79,7 @@ public class AddFlight extends HttpServlet {
 		trans.commit();
 		session.close();
 		
-		response.sendRedirect("list_product.jsp");
+		response.sendRedirect("list_flights.jsp");
 	}
 
 
