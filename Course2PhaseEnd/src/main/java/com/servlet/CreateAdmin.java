@@ -26,67 +26,59 @@ import com.util.HibernateUtil;
 @WebServlet("/CreateAdmin")
 public class CreateAdmin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public CreateAdmin() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
+	public CreateAdmin() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
-	
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
 			PrintWriter out = response.getWriter();
 			out.println("<html><body>");
-			
+
 			// Retrieve user-entered credentials
 			String adminkey = request.getParameter("adminKey");
 			String adminun = request.getParameter("createAdminUN");
 			String adminpw = request.getParameter("createAdminPass");
-			
+
 			Session session = HibernateUtil.getSessionFactory().openSession();
 			Transaction trans = session.beginTransaction();
-			
+
 			// Verify the correct admin key was entered
-			if(adminkey.equals("adminkey123")) {
+			if (adminkey.equals("adminkey123")) {
 
 				Criteria crit = session.createCriteria(Admin.class);
 				crit.add(Restrictions.eq("adminUN", adminun));
 				crit.add(Restrictions.eq("adminPW", adminpw));
 
 				List<Admin> checkUN = crit.list();
-				
-				if(checkUN.isEmpty()){
-					Admin admin1 = new Admin(adminun,adminpw);
+
+				if (checkUN.isEmpty()) {
+					Admin admin1 = new Admin(adminun, adminpw);
 					out.println("New admin user account successfully created.");
 					session.save(admin1);
 					trans.commit();
 					session.close();
-					response.sendRedirect("dashboard.jsp");
-				} else{
-					response.sendRedirect("UNexists.html");
+					response.sendRedirect("admin/dashboard.jsp");
+				} else {
+					response.sendRedirect("admin/UNexists.html");
 					out.println("Sorry! The username entered already exists. Please select a new username.");
 				}
-			}else {			
-				response.sendRedirect("InvalidKey.html");
-				out.println("An invalid key was entered. Please try again.");	
+			} else {
+				response.sendRedirect("admin/InvalidKey.html");
+				out.println("An invalid key was entered. Please try again.");
 			}
-			
-		
-		} catch(Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

@@ -21,58 +21,48 @@ import com.util.HibernateUtil;
 @WebServlet("/UpdateBooked")
 public class UpdateBooked extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UpdateBooked() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	public UpdateBooked() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		int confKey = Integer.parseInt(request.getParameter("pid"));
-		
+
 		// String itinID = request.getParameter("itinID");
 		String fname = request.getParameter("fname");
 		String lname = request.getParameter("lname");
 		String airline = request.getParameter("airlinename");
 		String fnum = request.getParameter("flightnum");
 		int numPass = Integer.parseInt(request.getParameter("numPass"));
-//		DecimalFormat numFormat = new DecimalFormat("#.00");
-//		String formatNumPass = numFormat.format(numPass);
-		
+
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		
+
 		Transaction trans = session.beginTransaction();
-		
+
 		ConfirmedFlights cf = session.load(ConfirmedFlights.class, confKey);
-		
+
 		cf.setAirlinename(airline);
 		cf.setFlightnum(fnum);
 		cf.setFname(fname);
 		cf.setLname(lname);
 		cf.setNumPass(numPass);
-		
+
 		session.save(cf);
-		
+
 		trans.commit();
 		session.close();
-		
-		response.sendRedirect("viewbooked.jsp");
-	}
 
-	
+		response.sendRedirect("admin/viewbooked.jsp");
+	}
 
 }

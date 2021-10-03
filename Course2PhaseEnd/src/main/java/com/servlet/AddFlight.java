@@ -26,19 +26,21 @@ import com.util.HibernateUtil;
 @WebServlet("/AddFlight")
 public class AddFlight extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AddFlight() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public AddFlight() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String itinID = request.getParameter("newItinId");
 		String deptdate = request.getParameter("newItinDeptDate");
 		String deptloc = request.getParameter("newItinDeptLoc");
@@ -49,38 +51,23 @@ public class AddFlight extends HttpServlet {
 		String arriveTime = request.getParameter("arriveTime");
 		int flightCapacity = Integer.parseInt(request.getParameter("newItinPlaneCap"));
 		double ticketPrice = Double.parseDouble(request.getParameter("newItinPrice"));
-//		int flightCapacity = 180;
-//		double ticketPrice = 256.57;
-		
-		
-		
+
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		
+
 		Transaction trans = session.beginTransaction();
-		
+
 		Airlines airline = new Airlines(airlineName, ticketPrice, flightCapacity);
-		
+
 		Schedule sch = new Schedule(flightNum, departTime, arriveTime);
-		
-		Itinerary itin = new Itinerary(itinID,deptdate,deptloc,dest,sch,airline);
-		
-		
-		// --> How to add the embedded tables in for Flight # (Airline, Ticket Price, Flight Capacity) & Flight # (booked itins)
-//		ProductImage img1 = new ProductImage(imgURL, product);
-		
-//		img1.addImageMeta(new ProductImageMeta("height",imgH,img1));
-//		img1.addImageMeta(new ProductImageMeta("width",imgW,img1));
-//		
-//		product.addImage(img1);
-		
+
+		Itinerary itin = new Itinerary(itinID, deptdate, deptloc, dest, sch, airline);
+
 		session.save(itin);
 
-		
 		trans.commit();
 		session.close();
-		
-		response.sendRedirect("list_flights.jsp");
-	}
 
+		response.sendRedirect("admin/list_flights.jsp");
+	}
 
 }

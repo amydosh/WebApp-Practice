@@ -21,26 +21,21 @@ import com.util.HibernateUtil;
 @WebServlet("/UpdatePackage")
 public class UpdateFlight extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UpdateFlight() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+	public UpdateFlight() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String itinID = request.getParameter("itinID");
 		String deptDate = request.getParameter("deptDate");
 		String deptLoc = request.getParameter("deptLoc");
@@ -53,23 +48,22 @@ public class UpdateFlight extends HttpServlet {
 		int flightCapacity = Integer.parseInt(request.getParameter("flightCap"));
 		double ticketPrice = Double.parseDouble(request.getParameter("ticketPrice"));
 
-		
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		
+
 		Transaction trans = session.beginTransaction();
-		
+
 		Airlines airline = new Airlines(airlineName, ticketPrice, flightCapacity);
 		airline.setAirlineName(airlineName);
 		airline.setFlightCapacity(flightCapacity);
 		airline.setTicketPrice(ticketPrice);
-		
+
 		Schedule sch = new Schedule(flightNum, departTime, arriveTime);
 		sch.setArriveTime(arriveTime);
 		sch.setDepartTime(departTime);
 		sch.setFlightNum(flightNum);
-		
+
 		Itinerary i = session.load(Itinerary.class, iKey);
-		
+
 		i.setItinID(itinID);
 		i.setDepartDate(deptDate);
 		i.setDepartLoc(deptLoc);
@@ -77,11 +71,11 @@ public class UpdateFlight extends HttpServlet {
 		i.setSchedule(sch);
 		i.setAirline(airline);
 		session.save(i);
-		
+
 		trans.commit();
 		session.close();
-		
-		response.sendRedirect("list_flights.jsp");
+
+		response.sendRedirect("admin/list_flights.jsp");
 	}
 
 }

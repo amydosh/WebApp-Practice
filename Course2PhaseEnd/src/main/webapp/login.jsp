@@ -10,13 +10,13 @@
 
 <%
 if(request.getParameter("error")!= null){
-	out.println("<b>Your session has expired or is invalid.</b><br>");
+	out.println("<b>You must be logged in to view the Admin pages.</b><br>");
 }
 %>
 
 <br>
 <b> To create a new admin user account, please click 
-<a href="CreateAdmin.html">here. </a></b><br><br>
+<a href="admin/CreateAdmin.html">here. </a></b><br><br>
 	
 <form method="post" action="adminAuth">
 <br>

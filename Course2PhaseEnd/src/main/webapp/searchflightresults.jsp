@@ -1,5 +1,5 @@
 <%@page import="com.util.HibernateUtil" %>
-<%@page import="org.hibernate.Session" %>
+<%@page import="org.hibernate.Session" %> 
 <%@page import="org.hibernate.Criteria"%>
 <%@page import="org.hibernate.criterion.Criterion" %>
 <%@page import="javax.persistence.criteria.CriteriaBuilder"%>
@@ -54,6 +54,10 @@
 	
 	if(itins.isEmpty()){
 		pwout.println("Sorry, there are no matching itineraries.<br> Please try modifying your search parameters.");
+				%>
+				<br>
+				<a href="search.jsp">Return to Search</a>
+				<%
 	} else{ %>
 	
 		<h1><b>List of Matching Itineraries</b></h1>
