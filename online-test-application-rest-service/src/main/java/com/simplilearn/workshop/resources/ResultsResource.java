@@ -1,5 +1,7 @@
 package com.simplilearn.workshop.resources;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +20,8 @@ public class ResultsResource {
 	private ResultsRepository resultsRepository;
 	
 	@GetMapping(path="/results")
-	public Results getMessage() {
-		return resultsRepository.findAll().get(0);
+	public List<Results> getMessage() {
+		return resultsRepository.findAll();
 	}
 	
 }
