@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Route } from '@angular/compiler/src/core';
+import { NgForm } from '@angular/forms';
 
 export class Question{
   constructor(

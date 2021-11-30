@@ -1,4 +1,4 @@
-import { Results, ResultsServiceService } from './../service/data/results-service.service';
+import { Welcome, WelcomeDataService } from './../service/data/welcome-data.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -10,19 +10,23 @@ import { ActivatedRoute } from '@angular/router';
 export class WelcomeComponent implements OnInit {
 
   name='';
-  resultsFromService:string='';
-  constructor(private route:ActivatedRoute, private service:ResultsServiceService) { }
+  welcomeMessageFromService:string='';
+  
+  constructor(
+    private route:ActivatedRoute, 
+    private service:WelcomeDataService) 
+    { }
 
   ngOnInit(): void {
     this.name = this.route.snapshot.params['name'];
   }
 
-  handleResults(response:any){
-    this.resultsFromService = response.message;
+  handleSuccessfulResponse(response:any){
+    this.welcomeMessageFromService = response.message;
   }
 
-  getResultsFromService(){
-    this.service.executeResultsRestService().subscribe(response => this.handleResults(response));
+  getWelcomeMessage(){
+    this.service.executeWelcomeRestService().subscribe(response => this.handleSuccessfulResponse(response));
   }
 
 

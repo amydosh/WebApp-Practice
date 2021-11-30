@@ -14,12 +14,14 @@ import { ErrorComponent } from './error/error.component';
 import { MenuComponent } from './menu/menu.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
 import { AdminComponent } from './admin/admin.component';
 import { AdmindashComponent } from './admindash/admindash.component';
 import { QuestionsComponent } from './questions/questions.component';
 import { TakequizComponent } from './takequiz/takequiz.component';
+import { PassComponent } from './pass/pass.component';
+import { FailComponent } from './fail/fail.component';
 
 @NgModule({
   declarations: [
@@ -37,14 +39,17 @@ import { TakequizComponent } from './takequiz/takequiz.component';
     AdminComponent,
     AdmindashComponent,
     QuestionsComponent,
-    TakequizComponent
+    TakequizComponent,
+    PassComponent,
+    FailComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     Ng2SearchPipeModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

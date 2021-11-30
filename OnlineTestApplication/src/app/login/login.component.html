@@ -1,9 +1,11 @@
 <!doctype html>
-<h1>Login</h1>
+<h1>Login</h1><br><br>
 <div class="container">
     <div class="alert alert-danger" *ngIf='invalidLogin'>{{errorMessage}}</div>
 </div>
-
+<div class="container">
+    <b>Welcome to the Online Test Application, to continue, please login below.</b><br><br>
+</div>
 <div>
     Username: <input type="text" name="username" [(ngModel)]="username" />
     Password: <input type="password" name="password" [(ngModel)]="password"/><br>

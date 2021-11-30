@@ -1,3 +1,5 @@
+import { FailComponent } from './fail/fail.component';
+import { PassComponent } from './pass/pass.component';
 import { TakequizComponent } from './takequiz/takequiz.component';
 import { AdmindashComponent } from './admindash/admindash.component';
 import { AdminComponent } from './admin/admin.component';
@@ -11,6 +13,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 const routes: Routes = [
   {path:'', component: LoginComponent},
@@ -24,6 +27,8 @@ const routes: Routes = [
   {path:'admin', component: AdminComponent},
   {path:'admindash',component: AdmindashComponent},
   {path:'takequiz', component: TakequizComponent},
+  {path:'pass', component: PassComponent},
+  {path:'fail', component:FailComponent},
   {path:'**', component: ErrorComponent}
 ];
 

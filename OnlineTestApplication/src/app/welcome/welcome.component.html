@@ -7,14 +7,14 @@
 <br>
 
 <div class="container">
-    Click here to get your results.<br>
-    <button (click) = "getResultsFromService()" class="btn btn-success">Get your Results</button>
+    <i>Using this button to check back-end connection</i>><br>
+    <button (click) = getWelcomeMessage() class="btn btn-success">Get your Results</button>
 </div>
 
 <br>
 <br>
 
-<div class="container" *ngIf="resultsFromService">
+<div class="container" *ngIf="welcomeMessageFromService">
     <h3>Results from service test:</h3>
-    {{resultsFromService}}
+    {{welcomeMessageFromService}}
 </div>

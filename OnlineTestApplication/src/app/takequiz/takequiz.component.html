@@ -1,5 +1,7 @@
 <h1>Welcome to your Quiz!</h1>
 
+<div>
+    <form [formGroup] = "formdata" (ngSubmit)="onClickSubmit(formdata.value)">
 
 <table class="table">
     <thead>
@@ -12,12 +14,26 @@
     <tbody>
         <tr>
             <td>Question 1</td>
-            <td>sample verbiage</td>
-            <td><input type="text" name="answered" id="answered"></td>
+            <td>What is 1+1?</td>
+            <td><input type="text" name="answered1" id="answered1" formControlName="answered1"></td>
+        </tr>
+        <tr>
+            <td>Question 2</td>
+            <td>What is 2+8?</td>
+            <td><input type="text" name="answered2" id="answered2" formControlName="answered2"></td>
+        </tr>
+        <tr>
+            <td>Question 3</td>
+            <td>What color is grass?</td>
+            <td><input type="text" name="answered3" id="answered3" formControlName="answered3"></td>
+        </tr>
+        <tr>
+            <td>Question 4</td>
+            <td>What sound does a cat make?</td>
+            <td><input type="text" name="answered4" id="answered4" formControlName="answered4"></td>
         </tr>
     </tbody>
 </table>
+<input type="submit" class="forsubmit" value="Save">
+</form>
 
-<div>
-    <button (click)="saveAndReview()" class="btn btn-success">Save & Review</button>
-</div>
