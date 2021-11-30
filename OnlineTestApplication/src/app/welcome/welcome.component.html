@@ -1,0 +1,20 @@
+<h2>Welcome!</h2>
+
+<div class="container">
+    <b>Welcome {{name}}! </b><br><br>
+    When you are ready to start your test, please click <a routerLink="/takequiz">here.</a><br>
+</div>
+<br>
+
+<div class="container">
+    Click here to get your results.<br>
+    <button (click) = "getResultsFromService()" class="btn btn-success">Get your Results</button>
+</div>
+
+<br>
+<br>
+
+<div class="container" *ngIf="resultsFromService">
+    <h3>Results from service test:</h3>
+    {{resultsFromService}}
+</div>

@@ -1,0 +1,16 @@
+<h1>Add a New To-Do</h1>
+<div class="container">
+    <fieldset class="form-group">
+        <label for="questionnum">Description</label>
+        <input type="text" name="questionnum" id="questionnum" class="form-control" required="required">
+    </fieldset>
+    <fieldset class="form-group">
+        <label for="question">Question</label>
+        <input type="text" name="question" id="question" class="form-control" required="required">
+    </fieldset>
+    <fieldset class="form-group">
+        <label for="answer">Answer</label>
+        <input type="text" name="answer" id="answer" class="form-control" required="required">
+    </fieldset>
+    <button class="btn btn-success" (click)="saveQuestion()">Save</button>
+</div>
