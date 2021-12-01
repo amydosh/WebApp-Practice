@@ -1,7 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 export class Quiz {
+  httpOptions = {
+    headers: new HttpHeaders({'Content-Type':'application/json'})
+  };
+
   constructor(
     public message: string
     ){}

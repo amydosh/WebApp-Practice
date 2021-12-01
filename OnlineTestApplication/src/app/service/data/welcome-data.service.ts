@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 export class Welcome {
@@ -11,9 +12,15 @@ export class Welcome {
 })
 export class WelcomeDataService {
 
-  constructor(private http: HttpClient) { }
+  httpOptions = {
+    headers: new HttpHeaders({'Content-Type':'application/json'})
+  };
+
+  constructor(
+    private http: HttpClient
+    ) { }
 
   executeWelcomeRestService(){
-    return this.http.get<Welcome>('http:localhost:8080/welcome');
+    return this.http.get<Welcome>('http://localhost:8080/welcome');
   }
 }

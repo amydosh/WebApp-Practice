@@ -4,3 +4,33 @@
 <h2>Please select from the following options:</h2><br>
 <a routerLink="/questions">Update Questions</a><br>
 <a routerLink="/quiz">See Current Questions</a>
+
+<!-- <div class="container">
+    <i>Using this button to check back-end connection</i>><br>
+    <button (click) = getQuestions() class="btn btn-success">Show Current Quiz Questions</button>
+</div> -->
+
+<br>
+<br>
+<!-- 
+<div class="container" *ngIf="questionFromService"> -->
+<div class="container">
+    <h3>Results from service test:</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Question Number</th>
+                <th>Question</th>
+                <th>Answer</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor{{questionFromService}}>
+                <td>{{questionnum}}</td>
+                <td>{{questiondesc}}</td>
+                <td>{{answer}}</td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
